@@ -9,7 +9,7 @@ document.querySelector('#app').innerHTML = `
     </div>    
   </div>
 `;
-
+const loadingTime = 1250;
 const mapLength = 12;
 let counter = mapLength;
 for (let i = 0; i < mapLength; i++) {
@@ -20,10 +20,22 @@ for (let i = 0; i < mapLength; i++) {
       i
     )}" /></div>`;
     counter--;
-    if (counter === 0) {     
-      document.querySelector('.hide').className = 'map';
-      document.querySelector('.loading').className = 'title';
-    }    
-  }, i * 1150);
+    if (counter === 0) {
+      initGame();
+    }
+  }, i * loadingTime);
 }
+
+const initGame = () => {
+  document.querySelector('.hide').className = 'map';
+  document.querySelector('.loading').className = 'title';
+  const cards = document.querySelectorAll('.face-card');  
+   for (let i = 0; i < cards.length; i++) {
+     ['click','touchend'].forEach(e => cards[i].addEventListener(e,function() {       
+       cards[i].classList.toggle("removed");
+     }))    
+ }  
+};
+
+
 
